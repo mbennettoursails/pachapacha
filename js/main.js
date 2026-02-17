@@ -4,7 +4,7 @@
  * 
  * Table of Contents:
  * 1. Language Management
- * 2. Mobile Menu
+ * 2. Mobile Menu (with Accessibility)
  * 3. Scroll Animations
  * 4. Navigation Effects
  * 5. Smooth Scrolling
@@ -90,28 +90,104 @@ function updateLanguageButtons(jaId, enId, activeLang) {
 }
 
 // ==========================================================================
-// 2. Mobile Menu
+// 2. Mobile Menu (with Accessibility)
 // ==========================================================================
 
 /**
+ * Store the element that had focus before menu opened
+ */
+let previouslyFocusedElement = null;
+
+/**
+ * Handle escape key to close mobile menu
+ * @param {KeyboardEvent} event - The keyboard event
+ */
+function handleMenuEscape(event) {
+    if (event.key === 'Escape') {
+        const menu = document.getElementById('mobile-menu');
+        if (menu && !menu.classList.contains('translate-x-full')) {
+            toggleMobileMenu();
+        }
+    }
+}
+
+/**
+ * Trap focus within mobile menu when open
+ * @param {KeyboardEvent} event - The keyboard event
+ */
+function handleMenuTabTrap(event) {
+    if (event.key !== 'Tab') return;
+    
+    const menu = document.getElementById('mobile-menu');
+    const focusableElements = menu.querySelectorAll(
+        'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    
+    if (event.shiftKey) {
+        // Shift + Tab: going backwards
+        if (document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+        }
+    } else {
+        // Tab: going forwards
+        if (document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+        }
+    }
+}
+
+/**
  * Toggle the mobile navigation menu
- * Also handles body scroll lock when menu is open
+ * Also handles body scroll lock, focus management, and keyboard accessibility
  */
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
-    const menuBtn = document.querySelector('[aria-controls="mobile-menu"]');
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('mobile-menu-close');
     
     menu.classList.toggle('translate-x-full');
     
     const isOpen = !menu.classList.contains('translate-x-full');
     
-    // Update aria-expanded
+    // Update aria attributes
     if (menuBtn) {
         menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
+    menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
     
     // Lock/unlock body scroll
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    
+    if (isOpen) {
+        // Store currently focused element
+        previouslyFocusedElement = document.activeElement;
+        
+        // Move focus to the close button
+        setTimeout(() => {
+            if (closeBtn) {
+                closeBtn.focus();
+            }
+        }, 100);
+        
+        // Add keyboard event listeners
+        document.addEventListener('keydown', handleMenuEscape);
+        menu.addEventListener('keydown', handleMenuTabTrap);
+    } else {
+        // Remove keyboard event listeners
+        document.removeEventListener('keydown', handleMenuEscape);
+        menu.removeEventListener('keydown', handleMenuTabTrap);
+        
+        // Restore focus to the element that opened the menu
+        if (previouslyFocusedElement) {
+            previouslyFocusedElement.focus();
+            previouslyFocusedElement = null;
+        }
+    }
 }
 
 // ==========================================================================
@@ -401,6 +477,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize contact form
     initContactForm();
+    
+    // Set initial aria-hidden state for mobile menu
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.setAttribute('aria-hidden', 'true');
+    }
 });
 
 /**
