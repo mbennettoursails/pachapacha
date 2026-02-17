@@ -1,0 +1,235 @@
+/**
+ * PachaPacha - Custom Styles
+ * パチャパチャ - カスタムスタイル
+ * 
+ * Table of Contents:
+ * 1. Glass Effects
+ * 2. Background Patterns
+ * 3. Ripple Effects
+ * 4. Text Gradients
+ * 5. Animations
+ * 6. Cards & Interactions
+ * 7. Language Toggle
+ * 8. Scrollbar
+ * 9. Bridge Graphics
+ */
+
+/* ==========================================================================
+   1. Glass Effects
+   ========================================================================== */
+
+.glass-earth {
+    background: rgba(250, 246, 241, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(166, 112, 56, 0.15);
+}
+
+.glass-dark {
+    background: rgba(20, 45, 55, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   2. Background Patterns
+   ========================================================================== */
+
+.bg-organic {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d7b8e' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   3. Ripple Effects
+   ========================================================================== */
+
+.ripple-container {
+    position: relative;
+}
+
+.ripple-container::before,
+.ripple-container::after {
+    content: '';
+    position: absolute;
+    border: 2px solid rgba(79, 182, 196, 0.3);
+    border-radius: 50%;
+    animation: ripple 3s ease-out infinite;
+}
+
+.ripple-container::after {
+    animation-delay: 1.5s;
+}
+
+/* ==========================================================================
+   4. Text Gradients
+   ========================================================================== */
+
+.text-gradient-earth {
+    background: linear-gradient(135deg, #a67038 0%, #3499a9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-water {
+    background: linear-gradient(135deg, #4fb6c4 0%, #2d7b8e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ==========================================================================
+   5. Animations
+   ========================================================================== */
+
+/* Bridge Animation */
+.bridge-line {
+    transform-origin: left center;
+}
+
+/* Smooth Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation Delays */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+
+/* ==========================================================================
+   6. Cards & Interactions
+   ========================================================================== */
+
+.card-lift {
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(45, 123, 142, 0.15);
+}
+
+/* ==========================================================================
+   7. Language Toggle
+   ========================================================================== */
+
+.lang-btn {
+    transition: all 0.25s ease;
+}
+
+.lang-btn.active {
+    background: white;
+    color: #264652;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lang-btn:not(.active) {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.lang-btn:not(.active):hover {
+    color: white;
+}
+
+/* Focus styles for accessibility */
+.lang-btn:focus {
+    outline: 2px solid #87d2db;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   8. Focus & Accessibility
+   ========================================================================== */
+
+/* Visible focus states for all interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #4fb6c4;
+    outline-offset: 2px;
+}
+
+/* Skip to main content link (for screen readers) */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #264652;
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .glass-earth,
+    .glass-dark {
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid white;
+    }
+    
+    .card-lift {
+        border: 2px solid currentColor;
+    }
+}
+
+/* ==========================================================================
+   8. Scrollbar
+   ========================================================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0fafb;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #87d2db;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4fb6c4;
+}
+
+/* ==========================================================================
+   9. Bridge Graphics
+   ========================================================================== */
+
+.bridge-svg {
+    filter: drop-shadow(0 4px 20px rgba(45, 123, 142, 0.2));
+}
