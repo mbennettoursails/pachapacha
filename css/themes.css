@@ -13,6 +13,15 @@
  * User preference is persisted to localStorage.
  */
 
+ /* Logo — theme-aware colours */
+#logo-svg path {
+    stroke: var(--c-text-primary);
+}
+
+#logo-wordmark {
+    color: var(--c-text-primary) !important;
+}
+
 /* ==========================================================================
    THEME: MONO (default — pure black/white/grays)
    ========================================================================== */
