@@ -43,11 +43,13 @@ function setLanguage(lang) {
     
     // Update all text elements with data-ja and data-en attributes
     document.querySelectorAll('[data-ja]').forEach(el => {
-        const text = el.getAttribute(`data-${lang}`);
-        if (text) {
-            el.textContent = text;
-        }
-    });
+    const text = el.getAttribute(`data-${lang}`);
+    if (text) {
+        // Don't overwrite button text — buttons handle their own state
+        if (el.tagName === 'BUTTON') return;
+        el.textContent = text;
+    }
+});
     
     // Update placeholders for form inputs
     document.querySelectorAll('[data-placeholder-ja]').forEach(el => {
