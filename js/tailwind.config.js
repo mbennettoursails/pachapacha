@@ -1,98 +1,112 @@
 /**
- * PachaPacha - Tailwind CSS Configuration
- * パチャパチャ - Tailwind CSS設定
- * 
- * This file configures the Tailwind CSS CDN with custom:
- * - Font families (DM Sans, Playfair Display, Noto Sans JP)
- * - Color palette (Earth, Water, Sage)
- * - Custom animations (ripple, float, wave, bridge)
+ * PachaPacha — Tailwind Config · Monochrome Minimal
+ * tailwind.config.js
+ *
+ * Palette: black / white / 9 grays only.
+ * All earth/water/sage color references in HTML continue
+ * to work — they now resolve to gray equivalents.
+ * This keeps the HTML untouched while the visual becomes monochrome.
  */
 
 tailwind.config = {
     theme: {
         extend: {
-            // Font Families
+
+            /* ─── Fonts ─────────────────────────────────────── */
             fontFamily: {
-                'sans': ['DM Sans', 'Noto Sans JP', 'sans-serif'],
-                'display': ['Playfair Display', 'serif'],
-                'jp': ['Noto Sans JP', 'sans-serif'],
+                'sans':    ['DM Sans', 'Noto Sans JP', 'sans-serif'],
+                'display': ['DM Sans', 'Noto Sans JP', 'sans-serif'],
+                'jp':      ['Noto Sans JP', 'sans-serif'],
             },
-            
-            // Custom Color Palette
+
+            /* ─── Monochrome Palette ─────────────────────────
+               All three brand palettes (earth / water / sage)
+               now map to the same gray scale.
+               50  = near white (#fafafa)
+               100 = very light (#f4f4f4)
+               200 = light border (#e8e8e8)
+               300 = mid-light (#d0d0d0)
+               400 = mid (#aaaaaa)
+               500 = mid-dark (#777777)
+               600 = dark (#555555)
+               700 = darker (#333333)
+               800 = near-black (#222222)
+               900 = deep (#181818)
+               950 = black (#111111)
+            ─────────────────────────────────────────────────── */
             colors: {
-                // Earth Tones - Warm browns inspired by Pachamama
+                /* Earth — maps to gray */
                 'earth': {
-                    50: '#faf6f1',
-                    100: '#f0e6d8',
-                    200: '#e0ccb0',
-                    300: '#cba87a',
-                    400: '#b8864f',
-                    500: '#a67038',
-                    600: '#8b5a2f',
-                    700: '#6f4527',
-                    800: '#5c3a24',
-                    900: '#4d3221',
-                    950: '#2a1a10',
+                    50:  '#fafafa',
+                    100: '#f4f4f4',
+                    200: '#e8e8e8',
+                    300: '#d0d0d0',
+                    400: '#aaaaaa',
+                    500: '#777777',
+                    600: '#555555',
+                    700: '#333333',
+                    800: '#222222',
+                    900: '#181818',
+                    950: '#111111',
                 },
-                // Water Tones - Cool teals for digital transformation
+                /* Water — maps to same gray scale */
                 'water': {
-                    50: '#f0fafb',
-                    100: '#d9f2f4',
-                    200: '#b8e5ea',
-                    300: '#87d2db',
-                    400: '#4fb6c4',
-                    500: '#3499a9',
-                    600: '#2d7b8e',
-                    700: '#2a6474',
-                    800: '#295361',
-                    900: '#264652',
-                    950: '#142d37',
+                    50:  '#fafafa',
+                    100: '#f4f4f4',
+                    200: '#e8e8e8',
+                    300: '#d0d0d0',
+                    400: '#aaaaaa',
+                    500: '#777777',
+                    600: '#555555',
+                    700: '#333333',
+                    800: '#222222',
+                    900: '#181818',
+                    950: '#111111',
                 },
-                // Sage Tones - Natural greens for growth
+                /* Sage — maps to same gray scale */
                 'sage': {
-                    50: '#f4f7f4',
-                    100: '#e3ebe3',
-                    200: '#c8d7c8',
-                    300: '#a1b9a1',
-                    400: '#759575',
-                    500: '#587858',
-                    600: '#445f44',
-                    700: '#384d38',
-                    800: '#2f3f2f',
-                    900: '#283428',
-                    950: '#131c13',
+                    50:  '#fafafa',
+                    100: '#f4f4f4',
+                    200: '#e8e8e8',
+                    300: '#d0d0d0',
+                    400: '#aaaaaa',
+                    500: '#777777',
+                    600: '#555555',
+                    700: '#333333',
+                    800: '#222222',
+                    900: '#181818',
+                    950: '#111111',
                 },
             },
-            
-            // Custom Animations
+
+            /* ─── Animations ────────────────────────────────── */
             animation: {
                 'ripple': 'ripple 3s ease-out infinite',
-                'float': 'float 6s ease-in-out infinite',
-                'wave': 'wave 8s ease-in-out infinite',
+                'float':  'float 6s ease-in-out infinite',
+                'wave':   'wave 8s ease-in-out infinite',
                 'bridge': 'bridge 2s ease-out forwards',
             },
-            
-            // Keyframes for Animations
+
             keyframes: {
                 ripple: {
-                    '0%': { transform: 'scale(1)', opacity: '0.4' },
-                    '100%': { transform: 'scale(2.5)', opacity: '0' },
+                    '0%':   { transform: 'scale(1)',   opacity: '0.3' },
+                    '100%': { transform: 'scale(2.5)', opacity: '0'   },
                 },
                 float: {
                     '0%, 100%': { transform: 'translateY(0)' },
-                    '50%': { transform: 'translateY(-15px)' },
+                    '50%':      { transform: 'translateY(-12px)' },
                 },
                 wave: {
                     '0%, 100%': { transform: 'translateX(0) translateY(0)' },
-                    '25%': { transform: 'translateX(10px) translateY(-5px)' },
-                    '50%': { transform: 'translateX(0) translateY(-10px)' },
-                    '75%': { transform: 'translateX(-10px) translateY(-5px)' },
+                    '25%':      { transform: 'translateX(8px) translateY(-4px)' },
+                    '50%':      { transform: 'translateX(0) translateY(-8px)' },
+                    '75%':      { transform: 'translateX(-8px) translateY(-4px)' },
                 },
                 bridge: {
-                    '0%': { transform: 'scaleX(0)', opacity: '0' },
+                    '0%':   { transform: 'scaleX(0)', opacity: '0' },
                     '100%': { transform: 'scaleX(1)', opacity: '1' },
                 },
-            }
+            },
         }
     }
 };

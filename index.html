@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" class="scroll-smooth">
+<html lang="ja" data-theme="mono" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,24 +89,59 @@
     
     <!-- Tailwind Configuration -->
     <script src="js/tailwind.config.js"></script>
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+
+    <!--
+        THEME SYSTEM NOTE
+        ─────────────────
+        themes.css replaces styles.css entirely.
+        It provides all base styles PLUS 4 switchable themes
+        (mono / earth / paper / night) via [data-theme] on <html>.
+
+        theme-switcher.js injects the floating style-switcher FAB,
+        marks sections with semantic classes, and persists the user's
+        choice to localStorage. Load it just before </body>.
+    -->
+
+    <!-- Theme Styles (replaces styles.css) -->
+    <link rel="stylesheet" href="css/themes.css">
 </head>
-<body class="bg-earth-50 text-water-950 antialiased overflow-x-hidden">
+<!--
+    data-theme="mono"  — default theme applied here to prevent FOUC.
+    theme-switcher.js will read localStorage and immediately update
+    this attribute before the first paint if the user has saved a
+    different preference.
+-->
+<body class="antialiased overflow-x-hidden">
 
     <!-- Skip to Main Content (Accessibility) -->
     <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
 
-    <!-- Navigation -->
+    <!-- ====================================================================
+         NAVIGATION
+    ===================================================================== -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-dark transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <a href="#" class="flex items-center space-x-3 group" aria-label="PachaPacha - ホームへ戻る (Return to home)">
-                    <div class="flex flex-col">
-                        <span class="font-display font-semibold text-xl tracking-tight"><span class="text-water-300">Pacha</span><span class="text-earth-300">Pacha</span></span>
-                        <span class="text-water-200 text-[10px] tracking-widest uppercase">パチャパチャ</span>
-                    </div>
+                
+                <!-- Logo: wave mark + wordmark
+                     id="logo-svg" lets themes.css target stroke/fill via CSS vars -->
+                <a href="/" aria-label="PachaPacha ホームへ">
+                    <svg id="logo-svg" width="220" height="72" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PachaPacha">
+                        <path d="M 0,12 C 70,-4 140,44 210,28 C 245,20 280,12 280,12"
+                            stroke="#111111" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+                        <path d="M 0,25 C 70,9 140,57 210,41 C 245,33 280,25 280,25"
+                            stroke="#111111" stroke-width="2.0" stroke-linecap="round" fill="none" opacity="0.72"/>
+                        <path d="M 0,38 C 70,22 140,70 210,54 C 245,46 280,38 280,38"
+                            stroke="#111111" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.38"/>
+                        <path d="M 0,51 C 70,35 140,83 210,67 C 245,59 280,51 280,51"
+                            stroke="#111111" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.38"/>
+                        <path d="M 0,64 C 70,48 140,96 210,80 C 245,72 280,64 280,64"
+                            stroke="#111111" stroke-width="2.0" stroke-linecap="round" fill="none" opacity="0.72"/>
+                        <path d="M 0,77 C 70,61 140,109 210,93 C 245,85 280,77 280,77"
+                            stroke="#111111" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+                        <text x="0" y="130" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif"
+                            font-weight="800" font-size="42" letter-spacing="-1.5" fill="#111111">PachaPacha</text>
+                    </svg>
                 </a>
                 
                 <!-- Desktop Navigation -->
@@ -125,6 +160,8 @@
                         <button id="lang-en" class="lang-btn px-4 py-1.5 rounded-full text-xs font-medium" onclick="setLanguage('en')" aria-label="Switch to English" aria-pressed="false">EN</button>
                     </div>
                     
+                    
+
                     <!-- CTA Button -->
                     <a href="#contact" class="hidden lg:flex items-center px-5 py-2.5 bg-gradient-to-r from-water-500 to-water-600 text-white rounded-lg font-medium text-sm hover:from-water-600 hover:to-water-700 transition-all shadow-lg shadow-water-500/25">
                         <span data-ja="無料相談" data-en="Free Consultation">無料相談</span>
@@ -139,6 +176,7 @@
         </div>
     </nav>
 
+    
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 z-40 bg-water-950 transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col justify-center items-center space-y-8" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true">
         <button id="mobile-menu-close" onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-white" aria-label="メニューを閉じる (Close menu)">
@@ -157,14 +195,24 @@
         </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- ====================================================================
+         MAIN CONTENT
+    ===================================================================== -->
     <main id="main-content">
-        <!-- Hero Section -->
+
+        <!-- ----------------------------------------------------------------
+             HERO SECTION
+             Class "hero-section" is added by theme-switcher.js at runtime
+             so that themes.css can apply the correct gradient background.
+             The inline bg-gradient-to-b class remains as a no-JS fallback.
+        ----------------------------------------------------------------- -->
         <section class="relative min-h-screen flex items-center pt-20 bg-gradient-to-b from-water-950 via-water-900 to-water-800 overflow-hidden">
             <!-- Animated Background Elements -->
             <div class="absolute inset-0 bg-organic opacity-30"></div>
             
-            <!-- Floating Orbs -->
+            <!-- Floating Orbs
+                 theme-switcher.js adds hero-orb-a / hero-orb-b classes
+                 so themes.css can swap the glow colour per theme. -->
             <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-water-400/20 rounded-full blur-[80px] animate-wave"></div>
             <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-earth-400/15 rounded-full blur-[100px] animate-wave" style="animation-delay: -4s;"></div>
             <div class="absolute top-1/2 right-1/3 w-48 h-48 bg-sage-400/10 rounded-full blur-[60px] animate-float"></div>
@@ -208,11 +256,15 @@
                 </div>
             </div>
             
-            <!-- Bottom Gradient Fade -->
+            <!-- Bottom Gradient Fade
+                 theme-switcher.js adds class "hero-wave-fade" so themes.css
+                 can match the fade colour to the body background per theme. -->
             <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent z-20"></div>
         </section>
 
-        <!-- Pain Points Section -->
+        <!-- ----------------------------------------------------------------
+             PAIN POINTS + SOLUTIONS SECTION
+        ----------------------------------------------------------------- -->
         <section id="services" class="py-24 bg-white relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl mx-auto text-center mb-16 reveal">
@@ -236,7 +288,7 @@
 
                 <!-- Solutions Section Header -->
                 <div class="text-center mb-12 reveal" id="solutions">
-                    <span class="text-water-500 font-bold tracking-wider text-sm uppercase" data-ja="ソリューション" data-en="Solutions">ソリューション</span>
+                    <span class="text-water-500 font-bold tracking-wider text-sm uppercase section-label" data-ja="ソリューション" data-en="Solutions">ソリューション</span>
                     <h2 class="mt-3 text-3xl md:text-4xl font-display font-bold text-water-950" data-ja="私たちのソリューション" data-en="Our Solutions">私たちのソリューション</h2>
                 </div>
 
@@ -250,7 +302,6 @@
                         <p class="text-water-700 text-sm leading-relaxed mb-4" data-ja="管理業務、マーケティング、営業、あらゆる手作業を自動化して効率を最大化。よりスマートに働きましょう。" data-en="Maximize your efficiency by automating admin, marketing, sales, and any and all manual tasks. Work smarter, not harder.">
                             管理業務、マーケティング、営業、あらゆる手作業を自動化して効率を最大化。よりスマートに働きましょう。
                         </p>
-                        
                     </div>
 
                     <!-- Knowledge Management -->
@@ -262,7 +313,6 @@
                         <p class="text-water-700 text-sm leading-relaxed mb-4" data-ja="組織内のファイルや情報を活用し、より良い意思決定と情報検索時間の削減を実現します。" data-en="Harness all the files and information in your organization so people can make better decisions and spend less time searching.">
                             組織内のファイルや情報を活用し、より良い意思決定と情報検索時間の削減を実現します。
                         </p>
-                        
                     </div>
 
                     <!-- Connecting Tools & Systems -->
@@ -274,17 +324,24 @@
                         <p class="text-water-700 text-sm leading-relaxed mb-4" data-ja="どんなツールやシステムをお使いでも、連携させてより効率的な業務と時間の節約を実現します。" data-en="No matter what tools or systems you use, we can connect them to help you work more efficiently and save you a lot of time.">
                             どんなツールやシステムをお使いでも、連携させてより効率的な業務と時間の節約を実現します。
                         </p>
-                       
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Approach Section -->
+        <!-- ----------------------------------------------------------------
+             APPROACH SECTION
+             theme-switcher.js adds class "approach-section" to this element
+             so themes.css can apply the correct background colour.
+        ----------------------------------------------------------------- -->
         <section id="approach" class="py-24 bg-earth-50 overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col lg:flex-row items-center gap-16">
-                    <!-- Visual -->
+                    <!-- Visual
+                         theme-switcher.js adds:
+                           "approach-visual" to the inner aspect-[4/3] div
+                           "approach-deco-a"  to the -top-6 decorative card
+                           "approach-deco-b"  to the -bottom-6 decorative card -->
                     <div class="lg:w-1/2 relative reveal">
                         <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl shadow-water-900/10">
                             <div class="aspect-[4/3] bg-gradient-to-br from-water-800 to-water-950 relative flex items-center justify-center overflow-hidden">
@@ -313,7 +370,7 @@
 
                     <!-- Content -->
                     <div class="lg:w-1/2 reveal delay-100">
-                        <span class="text-water-500 font-bold tracking-wider text-sm uppercase" data-ja="私たちの強み" data-en="Our Approach">私たちの強み</span>
+                        <span class="text-water-500 font-bold tracking-wider text-sm uppercase section-label" data-ja="私たちの強み" data-en="Our Approach">私たちの強み</span>
                         <h2 class="mt-3 text-3xl md:text-4xl font-display font-bold text-water-950 mb-6 leading-tight">
                             <span data-ja="技術だけでなく、" data-en="Beyond Technology.">技術だけでなく、</span><br>
                             <span class="text-gradient-water" data-ja="人と組織を理解する。" data-en="Understanding People.">人と組織を理解する。</span>
@@ -357,11 +414,13 @@
             </div>
         </section>
 
-        <!-- Team Section -->
+        <!-- ----------------------------------------------------------------
+             TEAM SECTION
+        ----------------------------------------------------------------- -->
         <section id="team" class="py-24 bg-white relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16 reveal">
-                    <span class="text-water-500 font-bold tracking-wider text-sm uppercase" data-ja="チーム" data-en="The Team">チーム</span>
+                    <span class="text-water-500 font-bold tracking-wider text-sm uppercase section-label" data-ja="チーム" data-en="The Team">チーム</span>
                     <h2 class="mt-3 text-3xl md:text-4xl font-display font-bold text-water-950" data-ja="橋を架ける二人" data-en="The Bridge Builders">橋を架ける二人</h2>
                     <p class="text-water-600 max-w-2xl mx-auto mt-4" data-ja="製品と組織、両方の専門性を持つパートナーシップ" data-en="A partnership combining product and organizational expertise">製品と組織、両方の専門性を持つパートナーシップ</p>
                 </div>
@@ -436,7 +495,11 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- ----------------------------------------------------------------
+             CONTACT SECTION
+             theme-switcher.js adds class "contact-section" to this element
+             so themes.css can apply the correct dark background per theme.
+        ----------------------------------------------------------------- -->
         <section id="contact" class="py-24 bg-gradient-to-b from-water-900 to-water-950 relative overflow-hidden">
             <div class="absolute inset-0 bg-organic opacity-10"></div>
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-water-400 opacity-10 blur-[150px] rounded-full pointer-events-none"></div>
@@ -460,8 +523,7 @@
                                 </div>
                                 <div>
                                     <p class="text-white font-medium" data-ja="メール" data-en="Email">メール</p>
-                                    <!-- Email without Cloudflare protection -->
-                                    <a href="mailto:pachapachajp@gmail.com" class="text-water-300 text-sm hover:text-water-200 transition-colors">pachapachajp@gmail.com</a>
+                                    <a href="/cdn-cgi/l/email-protection#c8b8a9aba0a9b8a9aba0a9a2b888afa5a9a1a4e6aba7a5" class="text-water-300 text-sm hover:text-water-200 transition-colors"><span class="__cf_email__" data-cfemail="641405070c051405070c050e14240309050d084a070b09">[email&#160;protected]</span></a>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-4">
@@ -517,9 +579,12 @@
                 </div>
             </div>
         </section>
+        
     </main>
 
-    <!-- Footer -->
+    <!-- ====================================================================
+         FOOTER
+    ===================================================================== -->
     <footer class="bg-water-950 py-12 border-t border-water-900" role="contentinfo">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -541,12 +606,40 @@
                 </div>
             </div>
         </div>
+
+        
     </footer>
-   
+
+    <!-- ====================================================================
+         SCRIPTS
+    ===================================================================== -->
+
     <!-- EmailJS SDK (must load before main.js) -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
-    <!-- Main JavaScript -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Main application script -->
     <script src="js/main.js"></script>
+
+    <!--
+        THEME SWITCHER
+        ──────────────
+        Load last so all DOM elements exist when the script runs.
+        It will:
+          1. Read localStorage for a saved theme preference
+          2. Fall back to OS dark-mode detection (prefers-color-scheme)
+          3. Apply the theme immediately via [data-theme] on <html>
+          4. Inject the floating ☀ FAB + panel into <body>
+          5. Mark sections with semantic helper classes that themes.css hooks into:
+               .hero-section      → hero <section>
+               .hero-wave-fade    → bottom fade div inside hero
+               .hero-orb-a/b      → animated blur orbs
+               .approach-section  → #approach <section>
+               .approach-visual   → the aspect-[4/3] inner div
+               .approach-deco-a/b → decorative offset cards
+               .contact-section   → #contact <section>
+    -->
+    <script src="js/theme-switcher.js"></script>
+
 </body>
 </html>

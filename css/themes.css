@@ -1,0 +1,928 @@
+/**
+ * PachaPacha — Multi-Theme System
+ * themes.css
+ *
+ * 4 switchable themes via [data-theme] on <html>:
+ *   1. mono        — current monochrome minimal (black/white/grays)
+ *   2. earth       — warm earth/water tones (original brand palette)
+ *   3. paper       — soft warm white editorial (light, typographic)
+ *   4. night       — deep night/ink dark mode
+ *
+ * All themes use CSS custom properties mapped into component classes.
+ * Switching is instant — no reload, no FOUC.
+ * User preference is persisted to localStorage.
+ */
+
+/* ==========================================================================
+   THEME: MONO (default — pure black/white/grays)
+   ========================================================================== */
+
+[data-theme="mono"],
+:root {
+    /* Surface */
+    --c-bg:            #ffffff;
+    --c-bg-alt:        #f7f7f7;
+    --c-bg-card:       #ffffff;
+    --c-bg-section:    #f4f4f4;
+
+    /* Hero (dark panel) */
+    --c-hero-from:     #111111;
+    --c-hero-via:      #1a1a1a;
+    --c-hero-to:       #222222;
+    --c-hero-orb-a:    rgba(150,150,150,0.12);
+    --c-hero-orb-b:    rgba(120,120,120,0.08);
+
+    /* Text */
+    --c-text-primary:  #111111;
+    --c-text-secondary:#444444;
+    --c-text-muted:    #888888;
+    --c-text-on-dark:  #ffffff;
+    --c-text-on-dark-muted: rgba(255,255,255,0.55);
+
+    /* Border */
+    --c-border:        #e5e5e5;
+    --c-border-dark:   rgba(255,255,255,0.12);
+
+    /* Brand accent (buttons, highlights) */
+    --c-accent:        #111111;
+    --c-accent-hover:  #333333;
+    --c-accent-text:   #ffffff;
+    --c-accent-subtle: #f0f0f0;
+
+    /* Icon backgrounds */
+    --c-icon-a:        #f0f0f0;
+    --c-icon-b:        #ebebeb;
+    --c-icon-c:        #e6e6e6;
+    --c-icon-text:     #333333;
+
+    /* Nav */
+    --c-nav-bg:        rgba(255,255,255,0.96);
+    --c-nav-border:    #e8e8e8;
+    --c-nav-text:      #333333;
+    --c-nav-hover-bg:  #f4f4f4;
+
+    /* Contact section */
+    --c-contact-bg:    #111111;
+    --c-contact-card:  rgba(255,255,255,0.06);
+    --c-contact-input: rgba(255,255,255,0.06);
+    --c-contact-border:rgba(255,255,255,0.14);
+
+    /* Footer */
+    --c-footer-bg:     #111111;
+    --c-footer-border: #222222;
+    --c-footer-text:   rgba(255,255,255,0.4);
+    --c-footer-brand-a:#bbbbbb;
+    --c-footer-brand-b:#999999;
+
+    /* Pain point cards */
+    --c-pain-bg:       #f9f9f9;
+    --c-pain-border:   #ececec;
+
+    /* Approach section */
+    --c-approach-bg:   #f4f4f4;
+    --c-approach-visual-from: #222222;
+    --c-approach-visual-to:   #111111;
+    --c-approach-deco-a: #e2e2e2;
+    --c-approach-deco-b: #d0d0d0;
+
+    /* Mobile menu */
+    --c-mobile-bg:     #111111;
+
+    /* Tags / pills */
+    --c-tag-bg:        rgba(255,255,255,0.08);
+    --c-tag-border:    rgba(255,255,255,0.14);
+
+    /* Submit button (on dark bg) */
+    --c-submit-bg:     #ffffff;
+    --c-submit-text:   #111111;
+    --c-submit-hover:  #e8e8e8;
+
+    /* Language pill wrapper */
+    --c-lang-pill:     #f0f0f0;
+    --c-lang-active-bg:#111111;
+    --c-lang-active-text:#ffffff;
+    --c-lang-inactive-text:#666666;
+
+    /* Overlay label colour (e.g. "Solutions" uppercase label) */
+    --c-label:         #999999;
+
+    /* Wave gradient at hero bottom */
+    --c-wave-fade:     #ffffff;
+
+    /* Logo strokes */
+    --c-logo:          #111111;
+}
+
+/* ==========================================================================
+   THEME: EARTH (warm greens / teals — original brand palette)
+   ========================================================================== */
+
+[data-theme="earth"] {
+    --c-bg:            #fafaf8;
+    --c-bg-alt:        #f3f4f0;
+    --c-bg-card:       #ffffff;
+    --c-bg-section:    #edf0e8;
+
+    --c-hero-from:     #0f2a1e;
+    --c-hero-via:      #1a3d2b;
+    --c-hero-to:       #0d3324;
+    --c-hero-orb-a:    rgba(74,222,128,0.15);
+    --c-hero-orb-b:    rgba(20,184,166,0.10);
+
+    --c-text-primary:  #1a2e1a;
+    --c-text-secondary:#2d4a2d;
+    --c-text-muted:    #5a7a5a;
+    --c-text-on-dark:  #ffffff;
+    --c-text-on-dark-muted: rgba(255,255,255,0.6);
+
+    --c-border:        #d8e4d0;
+    --c-border-dark:   rgba(255,255,255,0.15);
+
+    --c-accent:        #16a34a;
+    --c-accent-hover:  #15803d;
+    --c-accent-text:   #ffffff;
+    --c-accent-subtle: #dcfce7;
+
+    --c-icon-a:        #dcfce7;
+    --c-icon-b:        #ccfbf1;
+    --c-icon-c:        #d1fae5;
+    --c-icon-text:     #15803d;
+
+    --c-nav-bg:        rgba(250,250,248,0.95);
+    --c-nav-border:    #d8e4d0;
+    --c-nav-text:      #2d4a2d;
+    --c-nav-hover-bg:  #edf0e8;
+
+    --c-contact-bg:    #0f2a1e;
+    --c-contact-card:  rgba(255,255,255,0.06);
+    --c-contact-input: rgba(0,0,0,0.15);
+    --c-contact-border:rgba(255,255,255,0.15);
+
+    --c-footer-bg:     #0a1f14;
+    --c-footer-border: #1a3d2b;
+    --c-footer-text:   rgba(255,255,255,0.4);
+    --c-footer-brand-a:#86efac;
+    --c-footer-brand-b:#6ee7b7;
+
+    --c-pain-bg:       #f0f5ec;
+    --c-pain-border:   #d8e4d0;
+
+    --c-approach-bg:   #edf0e8;
+    --c-approach-visual-from: #0f2a1e;
+    --c-approach-visual-to:   #081a12;
+    --c-approach-deco-a: #c8dfc0;
+    --c-approach-deco-b: #b0d4a8;
+
+    --c-mobile-bg:     #0f2a1e;
+
+    --c-tag-bg:        rgba(255,255,255,0.1);
+    --c-tag-border:    rgba(255,255,255,0.18);
+
+    --c-submit-bg:     #ffffff;
+    --c-submit-text:   #0f2a1e;
+    --c-submit-hover:  #dcfce7;
+
+    --c-lang-pill:     #edf0e8;
+    --c-lang-active-bg:#16a34a;
+    --c-lang-active-text:#ffffff;
+    --c-lang-inactive-text:#5a7a5a;
+
+    --c-label:         #5a9a6a;
+
+    --c-wave-fade:     #fafaf8;
+
+    --c-logo:          #1a2e1a;
+}
+
+/* ==========================================================================
+   THEME: PAPER (soft editorial — warm cream, typographic, airy)
+   ========================================================================== */
+
+[data-theme="paper"] {
+    --c-bg:            #fefcf8;
+    --c-bg-alt:        #f8f4ec;
+    --c-bg-card:       #fefcf8;
+    --c-bg-section:    #f4ede0;
+
+    --c-hero-from:     #2c2016;
+    --c-hero-via:      #2c2016 ;
+    --c-hero-to:       #261a0e;
+    --c-hero-orb-a:    rgba(251,191,36,0.12);
+    --c-hero-orb-b:    rgba(234,179,8,0.08);
+
+    --c-text-primary:  #1c1308;
+    --c-text-secondary:#3d2d1e;
+    --c-text-muted:    #8a7060;
+    --c-text-on-dark:  #fefcf8;
+    --c-text-on-dark-muted: rgba(254,252,248,0.55);
+
+    --c-border:        #e8dcc8;
+    --c-border-dark:   rgba(254,252,248,0.14);
+
+    --c-accent:        #92400e;
+    --c-accent-hover:  #78350f;
+    --c-accent-text:   #fefcf8;
+    --c-accent-subtle: #fef3c7;
+
+    --c-icon-a:        #fef3c7;
+    --c-icon-b:        #fde68a;
+    --c-icon-c:        #fed7aa;
+    --c-icon-text:     #92400e;
+
+    --c-nav-bg:        rgba(254,252,248,0.96);
+    --c-nav-border:    #e8dcc8;
+    --c-nav-text:      #3d2d1e;
+    --c-nav-hover-bg:  #f4ede0;
+
+    --c-contact-bg:    #2c2016;
+    --c-contact-card:  rgba(254,252,248,0.06);
+    --c-contact-input: rgba(0,0,0,0.15);
+    --c-contact-border:rgba(254,252,248,0.15);
+
+    --c-footer-bg:     #1c1308;
+    --c-footer-border: #2c2016;
+    --c-footer-text:   rgba(254,252,248,0.4);
+    --c-footer-brand-a:#fcd34d;
+    --c-footer-brand-b:#fbbf24;
+
+    --c-pain-bg:       #f8f4ec;
+    --c-pain-border:   #e8dcc8;
+
+    --c-approach-bg:   #f4ede0;
+    --c-approach-visual-from: #3d2d1e;
+    --c-approach-visual-to:   #2c2016;
+    --c-approach-deco-a: #ddd0b8;
+    --c-approach-deco-b: #c8b898;
+
+    --c-mobile-bg:     #2c2016;
+
+    --c-tag-bg:        rgba(254,252,248,0.1);
+    --c-tag-border:    rgba(254,252,248,0.18);
+
+    --c-submit-bg:     #fefcf8;
+    --c-submit-text:   #1c1308;
+    --c-submit-hover:  #fef3c7;
+
+    --c-lang-pill:     #f4ede0;
+    --c-lang-active-bg:#92400e;
+    --c-lang-active-text:#fefcf8;
+    --c-lang-inactive-text:#8a7060;
+
+    --c-label:         #a07050;
+
+    --c-wave-fade:     #fefcf8;
+
+    --c-logo:          #1c1308;
+}
+
+/* ==========================================================================
+   THEME: NIGHT (deep dark — ink/slate, focused, sophisticated)
+   ========================================================================== */
+
+[data-theme="night"] {
+    --c-bg:            #0e1117;
+    --c-bg-alt:        #131820;
+    --c-bg-card:       #171e28;
+    --c-bg-section:    #131820;
+
+    --c-hero-from:     #070a10;
+    --c-hero-via:      #0c1018;
+    --c-hero-to:       #080b12;
+    --c-hero-orb-a:    rgba(99,102,241,0.12);
+    --c-hero-orb-b:    rgba(79,70,229,0.08);
+
+    --c-text-primary:  #e8eaf0;
+    --c-text-secondary:#b0b8cc;
+    --c-text-muted:    #6a7490;
+    --c-text-on-dark:  #e8eaf0;
+    --c-text-on-dark-muted: rgba(232,234,240,0.5);
+
+    --c-border:        #242d40;
+    --c-border-dark:   rgba(255,255,255,0.1);
+
+    --c-accent:        #6366f1;
+    --c-accent-hover:  #4f46e5;
+    --c-accent-text:   #ffffff;
+    --c-accent-subtle: #1e1b3a;
+
+    --c-icon-a:        #1e1b3a;
+    --c-icon-b:        #1a2236;
+    --c-icon-c:        #1c2040;
+    --c-icon-text:     #818cf8;
+
+    --c-nav-bg:        rgba(14,17,23,0.96);
+    --c-nav-border:    #242d40;
+    --c-nav-text:      #b0b8cc;
+    --c-nav-hover-bg:  #171e28;
+
+    --c-contact-bg:    #070a10;
+    --c-contact-card:  rgba(255,255,255,0.04);
+    --c-contact-input: rgba(255,255,255,0.05);
+    --c-contact-border:rgba(255,255,255,0.10);
+
+    --c-footer-bg:     #070a10;
+    --c-footer-border: #0e1117;
+    --c-footer-text:   rgba(255,255,255,0.35);
+    --c-footer-brand-a:#818cf8;
+    --c-footer-brand-b:#a5b4fc;
+
+    --c-pain-bg:       #131820;
+    --c-pain-border:   #242d40;
+
+    --c-approach-bg:   #131820;
+    --c-approach-visual-from: #1e1b3a;
+    --c-approach-visual-to:   #0e1117;
+    --c-approach-deco-a: #1c243a;
+    --c-approach-deco-b: #242d40;
+
+    --c-mobile-bg:     #070a10;
+
+    --c-tag-bg:        rgba(255,255,255,0.06);
+    --c-tag-border:    rgba(255,255,255,0.12);
+
+    --c-submit-bg:     #6366f1;
+    --c-submit-text:   #ffffff;
+    --c-submit-hover:  #4f46e5;
+
+    --c-lang-pill:     #171e28;
+    --c-lang-active-bg:#6366f1;
+    --c-lang-active-text:#ffffff;
+    --c-lang-inactive-text:#6a7490;
+
+    --c-label:         #818cf8;
+
+    --c-wave-fade:     #0e1117;
+
+    --c-logo:          #e8eaf0;
+}
+
+/* ==========================================================================
+   COMPONENT MAPPINGS
+   All theme-aware component styles — driven entirely by CSS vars above
+   ========================================================================== */
+
+/* --- Base --- */
+body {
+    background-color: var(--c-bg);
+    color: var(--c-text-primary);
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease;
+}
+
+/* --- Nav --- */
+.glass-dark {
+    background: var(--c-nav-bg);
+    border-bottom: 1px solid var(--c-nav-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+#navbar a {
+    color: var(--c-nav-text);
+}
+
+#navbar a:hover {
+    color: var(--c-text-primary);
+    background: var(--c-nav-hover-bg);
+}
+
+/* Logo SVG strokes + text */
+#logo-svg path,
+#logo-svg line {
+    stroke: var(--c-logo) !important;
+}
+
+#logo-svg text {
+    fill: var(--c-logo) !important;
+}
+
+/* --- Hero --- */
+section.hero-section {
+    background: linear-gradient(
+        to bottom,
+        var(--c-hero-from),
+        var(--c-hero-via),
+        var(--c-hero-to)
+    ) !important;
+    background-image: linear-gradient(
+        to bottom,
+        var(--c-hero-from),
+        var(--c-hero-via),
+        var(--c-hero-to)
+    ) !important;
+}
+
+.hero-orb-a {
+    background: var(--c-hero-orb-a) !important;
+}
+
+.hero-orb-b {
+    background: var(--c-hero-orb-b) !important;
+}
+
+.hero-wave-fade {
+    background: linear-gradient(to top, var(--c-wave-fade), transparent) !important;
+}
+
+/* --- Buttons --- */
+.btn-primary,
+a.btn-primary,
+button.btn-primary {
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    border-color: var(--c-accent);
+}
+
+.btn-primary:hover {
+    background: var(--c-accent-hover);
+    border-color: var(--c-accent-hover);
+}
+
+/* Gradient buttons in the hero (CTA) */
+a[class*="bg-gradient"],
+button[class*="bg-gradient"] {
+    background: var(--c-accent) !important;
+    background-image: none !important;
+    color: var(--c-accent-text) !important;
+    box-shadow: none !important;
+}
+
+a[class*="bg-gradient"]:hover,
+button[class*="bg-gradient"]:hover {
+    background: var(--c-accent-hover) !important;
+}
+
+/* Submit button (inside dark contact section) */
+#submit-btn {
+    background: var(--c-submit-bg) !important;
+    background-image: none !important;
+    color: var(--c-submit-text) !important;
+    box-shadow: none !important;
+}
+
+#submit-btn:hover {
+    background: var(--c-submit-hover) !important;
+}
+
+/* --- Cards --- */
+.card-lift {
+    background: var(--c-bg-card);
+    border-color: var(--c-border) !important;
+    transition:
+        transform 0.3s cubic-bezier(0.22,1,0.36,1),
+        box-shadow 0.3s cubic-bezier(0.22,1,0.36,1),
+        background-color 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgba(0,0,0,0.12);
+}
+
+/* Icon wrappers */
+.card-lift [class*="bg-water-100"],
+.card-lift [class*="bg-earth-100"],
+.card-lift [class*="bg-sage-100"] {
+    background: var(--c-icon-a) !important;
+}
+
+.card-lift svg[class*="text-water-600"],
+.card-lift svg[class*="text-earth-600"],
+.card-lift svg[class*="text-sage-600"] {
+    color: var(--c-icon-text) !important;
+}
+
+.group:hover .group-hover\:bg-water-500,
+.group:hover .group-hover\:bg-earth-500,
+.group:hover .group-hover\:bg-sage-500 {
+    background: var(--c-accent) !important;
+}
+
+/* --- Sections --- */
+section[class*="from-water-950"],
+section[class*="bg-gradient-to-b"],
+section.hero-section {
+    background: var(--c-hero-from) !important;
+    background-image: none !important;
+}
+
+section[class*="bg-earth-50"],
+.approach-section {
+    background: var(--c-approach-bg) !important;
+}
+
+/* Pain point cards */
+[class*="bg-earth-50"] {
+    background: var(--c-pain-bg) !important;
+    border-color: var(--c-pain-border) !important;
+}
+
+/* Approach visual card */
+.approach-visual {
+    background: linear-gradient(
+        135deg,
+        var(--c-approach-visual-from),
+        var(--c-approach-visual-to)
+    ) !important;
+}
+
+/* Decorative background cards behind the approach visual */
+.approach-deco-a {
+    background: var(--c-approach-deco-a) !important;
+}
+
+.approach-deco-b {
+    background: var(--c-approach-deco-b) !important;
+}
+
+/* --- Text Overrides --- */
+[class*="text-water-950"],
+[class*="text-water-900"] {
+    color: var(--c-text-primary) !important;
+}
+
+[class*="text-water-700"],
+[class*="text-water-800"] {
+    color: var(--c-text-secondary) !important;
+}
+
+[class*="text-water-500"],
+[class*="text-water-600"] {
+    color: var(--c-text-muted) !important;
+}
+
+[class*="text-water-400"],
+[class*="text-water-300"] {
+    color: var(--c-text-on-dark-muted) !important;
+}
+
+/* Uppercase label accent (e.g. "Solutions") */
+[class*="text-water-500"][class*="uppercase"],
+.section-label {
+    color: var(--c-label) !important;
+}
+
+/* Gradient text — flatten to primary colour */
+.text-gradient-earth,
+.text-gradient-water {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--c-text-primary) !important;
+    background-clip: unset !important;
+    color: var(--c-text-primary) !important;
+}
+
+/* --- Contact Section --- */
+section[class*="from-water-900"],
+.contact-section {
+    background: var(--c-contact-bg) !important;
+    background-image: none !important;
+}
+
+#contact-form {
+    background: var(--c-contact-card) !important;
+    border-color: var(--c-contact-border) !important;
+    backdrop-filter: blur(12px);
+}
+
+#contact-form input,
+#contact-form textarea {
+    background: var(--c-contact-input) !important;
+    border-color: var(--c-contact-border) !important;
+    color: var(--c-text-on-dark) !important;
+}
+
+#contact-form input::placeholder,
+#contact-form textarea::placeholder {
+    color: var(--c-text-on-dark-muted) !important;
+}
+
+#contact-form label {
+    color: var(--c-text-on-dark-muted) !important;
+}
+
+/* Contact icon boxes */
+.bg-water-800\/50 {
+    background: var(--c-contact-card) !important;
+    border-color: var(--c-contact-border) !important;
+}
+
+/* --- Footer --- */
+footer {
+    background: var(--c-footer-bg) !important;
+    border-top-color: var(--c-footer-border) !important;
+}
+
+footer [class*="text-water-400"] {
+    color: var(--c-footer-text) !important;
+}
+
+footer [class*="text-water-300"] {
+    color: var(--c-footer-brand-a) !important;
+}
+
+footer [class*="text-earth-300"] {
+    color: var(--c-footer-brand-b) !important;
+}
+
+/* --- Mobile Menu --- */
+#mobile-menu {
+    background: var(--c-mobile-bg) !important;
+}
+
+/* --- Language Toggle --- */
+.glass-dark div[role="group"] {
+    background: var(--c-lang-pill) !important;
+}
+
+.glass-dark .lang-btn.active {
+    background: var(--c-lang-active-bg) !important;
+    color: var(--c-lang-active-text) !important;
+}
+
+.glass-dark .lang-btn:not(.active) {
+    color: var(--c-lang-inactive-text) !important;
+}
+
+#mobile-menu .lang-btn.active {
+    background: var(--c-submit-bg) !important;
+    color: var(--c-submit-text) !important;
+}
+
+/* --- Tag Pills (hero badges) --- */
+[class*="bg-white/5"],
+[class*="bg-white/10"] {
+    background: var(--c-tag-bg) !important;
+    border-color: var(--c-tag-border) !important;
+}
+
+/* --- Approach value grid inner icon boxes --- */
+[class*="bg-water-100"],
+[class*="bg-earth-100"],
+[class*="bg-sage-100"] {
+    background: var(--c-icon-a) !important;
+}
+
+[class*="text-water-600"] svg,
+[class*="text-earth-600"] svg,
+[class*="text-sage-600"] svg {
+    color: var(--c-icon-text) !important;
+}
+
+/* --- Transition all theme-sensitive properties --- */
+nav,
+section,
+footer,
+.card-lift,
+#contact-form,
+input,
+textarea,
+button {
+    transition:
+        background-color 0.35s ease,
+        border-color 0.35s ease,
+        color 0.35s ease;
+}
+
+/* ==========================================================================
+   THEME SWITCHER WIDGET — Fixed floating button (bottom-right)
+   ========================================================================== */
+
+#theme-switcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+}
+
+/* FAB toggle button */
+#theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: var(--c-bg-card);
+    color: var(--c-text-primary);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    outline: none;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+#theme-toggle-btn:hover {
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.16),
+        0 2px 6px rgba(0, 0, 0, 0.10);
+    transform: translateY(-1px);
+}
+
+#theme-toggle-btn:active {
+    transform: translateY(0);
+}
+
+#theme-toggle-btn svg:not(.chevron) {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: var(--c-accent);
+}
+
+.theme-btn-label {
+    line-height: 1;
+}
+
+.chevron {
+    width: 10px;
+    height: 10px;
+    opacity: 0.50;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+#theme-toggle-btn[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+}
+
+/* Panel — pops up above the FAB button */
+#theme-panel {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    right: 0;
+    z-index: 9999;
+    background: var(--c-bg-card);
+    border: 1px solid var(--c-border);
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.08),
+        0 20px 48px -8px rgba(0, 0, 0, 0.22);
+    width: 210px;
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+    pointer-events: none;
+    transition:
+        opacity 0.20s ease,
+        transform 0.20s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#theme-panel.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+#theme-panel h3 {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+    margin: 0 0 8px 4px;
+}
+
+/* Theme option buttons */
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    margin-bottom: 4px;
+}
+
+.theme-option:last-child { margin-bottom: 0; }
+
+.theme-option:hover { background: var(--c-bg-alt); }
+
+.theme-option.active {
+    background: var(--c-accent-subtle);
+    border-color: var(--c-accent);
+}
+
+.theme-option-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-option-swatch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 7px;
+}
+
+.swatch-mono::before   { background: linear-gradient(135deg, #111 50%, #f7f7f7 50%); }
+.swatch-earth::before  { background: linear-gradient(135deg, #0f2a1e 50%, #fafaf8 50%); }
+.swatch-paper::before  { background: linear-gradient(135deg, #2c2016 50%, #fefcf8 50%); }
+.swatch-night::before  { background: linear-gradient(135deg, #070a10 50%, #0e1117 50%); }
+
+.theme-option-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.theme-option-label strong {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-text-primary);
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.theme-option-label span {
+    font-size: 0.7rem;
+    color: var(--c-text-muted);
+    line-height: 1;
+}
+
+.theme-check {
+    margin-left: auto;
+    width: 16px;
+    height: 16px;
+    color: var(--c-accent);
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.theme-option.active .theme-check { opacity: 1; }
+
+/* Mobile: move slightly inward from screen edge */
+@media (max-width: 640px) {
+    #theme-switcher {
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+/* ==========================================================================
+   NIGHT THEME: BODY & SECTION OVERRIDES
+   The night theme needs to override white backgrounds that can't
+   be addressed purely through component classes above.
+   ========================================================================== */
+
+[data-theme="night"] body {
+    background: #0e1117;
+}
+
+[data-theme="night"] section[class*="bg-white"],
+[data-theme="night"] .bg-white {
+    background: #171e28 !important;
+}
+
+[data-theme="night"] .card-lift {
+    background: #171e28;
+    border-color: #242d40 !important;
+}
+
+[data-theme="night"] .card-lift:hover {
+    box-shadow: 0 12px 32px -8px rgba(0,0,0,0.5);
+}
+
+[data-theme="night"] input,
+[data-theme="night"] textarea,
+[data-theme="night"] select {
+    background: #131820;
+    border-color: #242d40;
+    color: #e8eaf0;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    nav, section, footer, .card-lift, #contact-form,
+    input, textarea, button, body,
+    #theme-panel, #theme-toggle-btn {
+        transition-duration: 0.01ms !important;
+    }
+}

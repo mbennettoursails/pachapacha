@@ -1,98 +1,428 @@
 /**
- * PachaPacha - Custom Styles
- * パチャパチャ - カスタムスタイル
- * 
+ * PachaPacha — Monochrome Minimal
+ * styles.css
+ *
+ * Design system: black / white / grays only.
+ * No color. No gradients. Let the wave mark carry the brand.
+ *
  * Table of Contents:
- * 1. Glass Effects
- * 2. Background Patterns
- * 3. Ripple Effects
- * 4. Text Gradients
- * 5. Animations
- * 6. Cards & Interactions
- * 7. Language Toggle
- * 8. Scrollbar
- * 9. Bridge Graphics
+ * 1. Base & Reset
+ * 2. Typography
+ * 3. Nav & Glass
+ * 4. Buttons & CTAs
+ * 5. Cards
+ * 6. Sections
+ * 7. Wave Dividers
+ * 8. Forms
+ * 9. Language Toggle
+ * 10. Animations
+ * 11. Reveal
+ * 12. Scrollbar
+ * 13. Accessibility
  */
 
 /* ==========================================================================
-   1. Glass Effects
+   1. Base & Reset
    ========================================================================== */
 
-.glass-earth {
-    background: rgba(250, 246, 241, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(166, 112, 56, 0.15);
+*, *::before, *::after {
+    box-sizing: border-box;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #ffffff;
+    color: #111111;
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. Typography
+   ========================================================================== */
+
+.font-display {
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+}
+
+/* Minimal text hierarchy — no color, just weight and size */
+.text-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.text-gradient-earth,
+.text-gradient-water {
+    /* Strip gradients — use flat dark instead */
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: #111111;
+    background-clip: unset;
+    color: #111111;
+}
+
+/* ==========================================================================
+   3. Nav & Glass
+   ========================================================================== */
 
 .glass-dark {
-    background: rgba(20, 45, 55, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/* Nav links — dark on white */
+#navbar a,
+#navbar .lang-btn:not(.active) {
+    color: #444;
+}
+
+#navbar a:hover {
+    color: #111;
+    background: #f4f4f4;
+}
+
+/* Mobile menu — dark */
+#mobile-menu {
+    background: #111111;
 }
 
 /* ==========================================================================
-   2. Background Patterns
+   4. Buttons & CTAs
    ========================================================================== */
 
+/* Primary — solid black */
+.btn-primary,
+a.btn-primary,
+button.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    background: #111111;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    border: 2px solid #111111;
+    transition: background 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #333;
+    border-color: #333;
+}
+
+/* Secondary — outline */
+.btn-secondary,
+a.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    background: transparent;
+    color: #111111;
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    border-color: #111;
+    background: #f8f8f8;
+}
+
+/* Override hero CTA gradients */
+a[class*="bg-gradient"],
+button[class*="bg-gradient"] {
+    background: #111111 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+a[class*="bg-gradient"]:hover,
+button[class*="bg-gradient"]:hover {
+    background: #333333 !important;
+}
+
+a[class*="border-white"],
+a[class*="border-white/30"] {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* ==========================================================================
+   5. Cards
+   ========================================================================== */
+
+.card-lift {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    border-color: #e8e8e8 !important;
+    background: #ffffff;
+}
+
+.card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon wrappers — strip colors */
+.card-lift [class*="bg-water-"],
+.card-lift [class*="bg-earth-"],
+.card-lift [class*="bg-sage-"] {
+    background: #f4f4f4 !important;
+}
+
+.card-lift svg[class*="text-water-"],
+.card-lift svg[class*="text-earth-"],
+.card-lift svg[class*="text-sage-"] {
+    color: #111 !important;
+}
+
+/* Group hover icon fill — keep monochrome */
+.group:hover .group-hover\:bg-water-500,
+.group:hover .group-hover\:bg-earth-500,
+.group:hover .group-hover\:bg-sage-500 {
+    background: #111111 !important;
+}
+
+.group:hover .group-hover\:text-white {
+    color: #ffffff !important;
+}
+
+/* Pain point cards */
+[class*="bg-earth-50"] {
+    background: #f9f9f9 !important;
+    border-color: #e8e8e8 !important;
+}
+
+/* ==========================================================================
+   6. Sections
+   ========================================================================== */
+
+/* Hero — invert: dark hero stays dark (it's the one splash of contrast) */
+section[class*="from-water-950"],
+section[class*="bg-gradient-to-b"] {
+    background: #111111 !important;
+    background-image: none !important;
+}
+
+/* Remove floating orb blobs */
+section[class*="from-water-950"] > div[class*="absolute"][class*="blur"],
+section[class*="from-water-950"] > div[class*="animate-"] {
+    display: none;
+}
+
+/* Approach section bg */
+section[class*="bg-earth-50"] {
+    background: #f7f7f7 !important;
+}
+
+/* Approach visual card */
+.aspect-\[4\/3\] {
+    background: #111111 !important;
+    background-image: none !important;
+}
+
+/* Approach decorative cards behind visual */
+.absolute.-top-6 { background: #e8e8e8 !important; }
+.absolute.-bottom-6 { background: #d4d4d4 !important; }
+
+/* Bridge line in approach visual */
+.w-16.h-1 {
+    background: #fff !important;
+    background-image: none !important;
+}
+
+/* Contact section */
+section[class*="from-water-900"] {
+    background: #111111 !important;
+    background-image: none !important;
+}
+
+/* Remove contact section blobs */
+section[class*="from-water-900"] > div[class*="absolute"][class*="blur"],
+section[class*="from-water-900"] > div[class*="pointer-events-none"] {
+    display: none;
+}
+
+/* Contact icon boxes */
+.bg-water-800\/50 {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Footer */
+footer {
+    background: #111111 !important;
+    border-top-color: #222 !important;
+}
+
+/* ==========================================================================
+   7. Wave Dividers
+   ========================================================================== */
+
+/* Hero bottom gradient fade — keep white */
+section[class*="from-water-950"] .absolute.bottom-0.h-32 {
+    background: linear-gradient(to top, #ffffff, transparent) !important;
+}
+
+/* ==========================================================================
+   8. Forms
+   ========================================================================== */
+
+/* Contact form */
+#contact-form {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 32px;
+}
+
+#contact-form input,
+#contact-form textarea {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+}
+
+#contact-form input::placeholder,
+#contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+#contact-form label {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+#submit-btn {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #111111 !important;
+    font-weight: 700;
+    border-radius: 8px;
+    box-shadow: none !important;
+    transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+#submit-btn:hover {
+    background: #e8e8e8 !important;
+}
+
+#submit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   9. Language Toggle
+   ========================================================================== */
+
+.lang-btn {
+    transition: all 0.2s ease;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+}
+
+/* On dark navbar (inverted) */
+.glass-dark .lang-btn.active {
+    background: #111111;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.glass-dark .lang-btn:not(.active) {
+    color: #666;
+}
+
+.glass-dark .lang-btn:not(.active):hover {
+    color: #111;
+}
+
+/* Wrapper pill */
+.glass-dark div[role="group"] {
+    background: #f0f0f0 !important;
+    border-color: #e0e0e0 !important;
+}
+
+/* On mobile dark menu */
+#mobile-menu .lang-btn.active {
+    background: #ffffff;
+    color: #111111;
+    box-shadow: none;
+}
+
+#mobile-menu .lang-btn:not(.active) {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#mobile-menu div[role="group"] {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* ==========================================================================
+   10. Animations
+   ========================================================================== */
+
+/* Keep only the essentials — remove anything colorful */
+
+@keyframes revealUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero tag pills */
+[class*="bg-white/5"] {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Organic bg texture — remove */
 .bg-organic {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d7b8e' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: none;
+    display: none;
+}
+
+/* Team hover glow — remove color, keep subtle */
+.group:hover .group-hover\:opacity-50 {
+    opacity: 0 !important;
 }
 
 /* ==========================================================================
-   3. Ripple Effects
+   11. Reveal
    ========================================================================== */
 
-.ripple-container {
-    position: relative;
-}
-
-.ripple-container::before,
-.ripple-container::after {
-    content: '';
-    position: absolute;
-    border: 2px solid rgba(79, 182, 196, 0.3);
-    border-radius: 50%;
-    animation: ripple 3s ease-out infinite;
-}
-
-.ripple-container::after {
-    animation-delay: 1.5s;
-}
-
-/* ==========================================================================
-   4. Text Gradients
-   ========================================================================== */
-
-.text-gradient-earth {
-    background: linear-gradient(135deg, #a67038 0%, #3499a9 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.text-gradient-water {
-    background: linear-gradient(135deg, #4fb6c4 0%, #2d7b8e 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* ==========================================================================
-   5. Animations
-   ========================================================================== */
-
-/* Bridge Animation */
-.bridge-line {
-    transform-origin: left center;
-}
-
-/* Smooth Reveal */
 .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.active {
@@ -100,136 +430,115 @@
     transform: translateY(0);
 }
 
-/* Animation Delays */
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
 
 /* ==========================================================================
-   6. Cards & Interactions
+   12. Scrollbar
    ========================================================================== */
 
-.card-lift {
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+::-webkit-scrollbar {
+    width: 6px;
 }
 
-.card-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px -12px rgba(45, 123, 142, 0.15);
+::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
 }
 
 /* ==========================================================================
-   7. Language Toggle
+   13. Accessibility
    ========================================================================== */
 
-.lang-btn {
-    transition: all 0.25s ease;
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 3px;
 }
 
-.lang-btn.active {
-    background: white;
-    color: #264652;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.lang-btn:not(.active) {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.lang-btn:not(.active):hover {
-    color: white;
-}
-
-/* Focus styles for accessibility */
-.lang-btn:focus {
-    outline: 2px solid #87d2db;
-    outline-offset: 2px;
-}
-
-/* ==========================================================================
-   8. Focus & Accessibility
-   ========================================================================== */
-
-/* Visible focus states for all interactive elements */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-    outline: 2px solid #4fb6c4;
-    outline-offset: 2px;
-}
-
-/* Skip to main content link (for screen readers) */
 .skip-link {
     position: absolute;
     top: -40px;
     left: 0;
-    background: #264652;
-    color: white;
+    background: #111111;
+    color: #ffffff;
     padding: 8px 16px;
-    z-index: 100;
-    transition: top 0.3s;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 9999;
+    transition: top 0.2s ease;
+    text-decoration: none;
 }
 
 .skip-link:focus {
     top: 0;
 }
 
-/* Reduced motion preference */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-    
     .reveal {
         opacity: 1;
         transform: none;
     }
 }
 
-/* High contrast mode support */
+/* High contrast */
 @media (prefers-contrast: high) {
-    .glass-earth,
-    .glass-dark {
-        background: rgba(0, 0, 0, 0.95);
-        border: 2px solid white;
-    }
-    
-    .card-lift {
-        border: 2px solid currentColor;
-    }
+    body { background: #fff; color: #000; }
+    .card-lift { border: 2px solid #000 !important; }
+    #contact-form { border: 2px solid #fff !important; }
 }
 
 /* ==========================================================================
-   8. Scrollbar
+   14. Pain Point & Tag Overrides
    ========================================================================== */
 
-::-webkit-scrollbar {
-    width: 8px;
+/* Solutions section label */
+[class*="text-water-500"][class*="uppercase"] {
+    color: #999 !important;
 }
 
-::-webkit-scrollbar-track {
-    background: #f0fafb;
+/* Team section role titles */
+[class*="text-water-600"][class*="font-semibold"] {
+    color: #666 !important;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #87d2db;
-    border-radius: 4px;
+/* Tag chips on team cards */
+[class*="border-earth-200"] {
+    border-color: #e0e0e0 !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #4fb6c4;
+/* Approach section values grid sub-text */
+[class*="text-water-600"][class*="text-xs"] {
+    color: #888 !important;
 }
 
-/* ==========================================================================
-   9. Bridge Graphics
-   ========================================================================== */
+/* Approach section icon boxes */
+[class*="bg-water-100"],
+[class*="bg-earth-100"],
+[class*="bg-sage-100"] {
+    background: #f0f0f0 !important;
+}
 
-.bridge-svg {
-    filter: drop-shadow(0 4px 20px rgba(45, 123, 142, 0.2));
+[class*="text-water-600"],
+[class*="text-earth-600"],
+[class*="text-sage-600"] {
+    color: #555 !important;
 }
