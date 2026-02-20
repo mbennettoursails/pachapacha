@@ -21,6 +21,7 @@
         { id: 'earth', label: 'Earth', desc: 'Warm greens & nature',   swatchGradient: 'linear-gradient(135deg, #0f2a1e 50%, #fafaf8 50%)' },
         { id: 'paper', label: 'Paper', desc: 'Soft cream editorial',   swatchGradient: 'linear-gradient(135deg, #2c2016 50%, #fefcf8 50%)' },
         { id: 'night', label: 'Night', desc: 'Deep dark mode',         swatchGradient: 'linear-gradient(135deg, #070a10 50%, #0e1117 50%)' },
+        { id: '8bit',  label: '8-Bit', desc: 'Nintendo Famicom era',   swatchGradient: 'linear-gradient(135deg, #0f9b58 50%, #1a1a2e 50%)' },
     ];
 
     /* -----------------------------------------------------------------------

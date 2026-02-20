@@ -366,6 +366,337 @@
 }
 
 /* ==========================================================================
+   THEME: 8BIT — Nintendo era pixel aesthetic
+   Palette inspired by Famicom/NES hardware:
+   · Background: #1a1a2e (deep navy — NES boot screen)
+   · Primary green: #0f9b58 (classic Mario green)
+   · Red accent: #e8343a (Mario red / Nintendo logo)
+   · Yellow: #f7c948 (coin / star gold)
+   · Light: #c4cfa1 (Game Boy LCD green-gray)
+   · Dark panels: #0d0d1a (cartridge black)
+   ========================================================================== */
+
+[data-theme="8bit"] {
+    /* Surface */
+    --c-bg:            #1a1a2e;
+    --c-bg-alt:        #16213e;
+    --c-bg-card:       #0f3460;
+    --c-bg-section:    #16213e;
+
+    /* Hero */
+    --c-hero-from:     #0d0d1a;
+    --c-hero-via:      #1a1a2e;
+    --c-hero-to:       #16213e;
+    --c-hero-orb-a:    rgba(15,155,88,0.20);
+    --c-hero-orb-b:    rgba(232,52,58,0.15);
+
+    /* Text */
+    --c-text-primary:  #c4cfa1;
+    --c-text-secondary:#a8b888;
+    --c-text-muted:    #6b7c5a;
+    --c-text-on-dark:  #c4cfa1;
+    --c-text-on-dark-muted: rgba(196,207,161,0.55);
+
+    /* Border */
+    --c-border:        #0f9b58;
+    --c-border-dark:   rgba(15,155,88,0.30);
+
+    /* Accent — Mario red */
+    --c-accent:        #e8343a;
+    --c-accent-hover:  #c42830;
+    --c-accent-text:   #ffffff;
+    --c-accent-subtle: rgba(232,52,58,0.15);
+
+    /* Icon backgrounds — coin gold */
+    --c-icon-a:        rgba(247,201,72,0.15);
+    --c-icon-b:        rgba(15,155,88,0.15);
+    --c-icon-c:        rgba(232,52,58,0.12);
+    --c-icon-text:     #f7c948;
+
+    /* Nav */
+    --c-nav-bg:        rgba(13,13,26,0.97);
+    --c-nav-border:    #0f9b58;
+    --c-nav-text:      #c4cfa1;
+    --c-nav-hover-bg:  rgba(15,155,88,0.12);
+
+    /* Contact section */
+    --c-contact-bg:    #0d0d1a;
+    --c-contact-card:  rgba(15,155,88,0.08);
+    --c-contact-input: rgba(196,207,161,0.06);
+    --c-contact-border:rgba(15,155,88,0.30);
+
+    /* Footer */
+    --c-footer-bg:     #0d0d1a;
+    --c-footer-border: #0f9b58;
+    --c-footer-text:   rgba(196,207,161,0.4);
+    --c-footer-brand-a:#f7c948;
+    --c-footer-brand-b:#0f9b58;
+
+    /* Pain point cards */
+    --c-pain-bg:       #16213e;
+    --c-pain-border:   #0f9b58;
+
+    /* Approach section */
+    --c-approach-bg:   #16213e;
+    --c-approach-visual-from: #0d0d1a;
+    --c-approach-visual-to:   #1a1a2e;
+    --c-approach-deco-a: rgba(247,201,72,0.20);
+    --c-approach-deco-b: rgba(15,155,88,0.20);
+
+    /* Mobile menu */
+    --c-mobile-bg:     #0d0d1a;
+
+    /* Tag pills */
+    --c-tag-bg:        rgba(15,155,88,0.12);
+    --c-tag-border:    rgba(15,155,88,0.30);
+
+    /* Submit button */
+    --c-submit-bg:     #e8343a;
+    --c-submit-text:   #ffffff;
+    --c-submit-hover:  #c42830;
+
+    /* Language pill */
+    --c-lang-pill:     rgba(15,155,88,0.12);
+    --c-lang-active-bg:#0f9b58;
+    --c-lang-active-text:#0d0d1a;
+    --c-lang-inactive-text:#6b7c5a;
+
+    /* Section label */
+    --c-label:         #f7c948;
+
+    /* Wave fade */
+    --c-wave-fade:     #1a1a2e;
+
+    /* Logo */
+    --c-logo:          #0f9b58;
+}
+
+/* ==========================================================================
+   8BIT THEME — Pixel / retro overrides
+   Adds pixel-art textures, scanlines, chunky borders, and retro typography
+   on top of the CSS variable layer above.
+   ========================================================================== */
+
+
+/* Scanline overlay on the whole page */
+[data-theme="8bit"] body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 4px
+    );
+}
+
+/* Pixel font for headings */
+[data-theme="8bit"] h1,
+[data-theme="8bit"] h2,
+[data-theme="8bit"] h3 {
+    font-family: 'Press Start 2P', monospace !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.8 !important;
+    image-rendering: pixelated;
+}
+
+/* Pixel font for nav links */
+[data-theme="8bit"] #navbar a,
+[data-theme="8bit"] #navbar button {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.55rem !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Logo wordmark */
+[data-theme="8bit"] #logo-wordmark {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.08em !important;
+    color: #0f9b58 !important;
+}
+
+/* Chunky pixel borders on cards */
+[data-theme="8bit"] .card-lift {
+    border: 3px solid #0f9b58 !important;
+    border-radius: 0 !important;
+    box-shadow:
+        4px 4px 0 #0f9b58,
+        inset 0 0 0 1px rgba(15,155,88,0.20) !important;
+    image-rendering: pixelated;
+}
+
+[data-theme="8bit"] .card-lift:hover {
+    transform: translate(-2px, -2px) !important;
+    box-shadow:
+        6px 6px 0 #0f9b58,
+        inset 0 0 0 1px rgba(15,155,88,0.20) !important;
+}
+
+/* Chunky accent buttons */
+[data-theme="8bit"] a[class*="bg-gradient"],
+[data-theme="8bit"] button[class*="bg-gradient"],
+[data-theme="8bit"] .btn-primary {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.6rem !important;
+    border-radius: 0 !important;
+    border: 3px solid #c42830 !important;
+    box-shadow: 4px 4px 0 #c42830 !important;
+    letter-spacing: 0.05em !important;
+    background: #e8343a !important;
+    color: #ffffff !important;
+}
+
+[data-theme="8bit"] a[class*="bg-gradient"]:hover,
+[data-theme="8bit"] button[class*="bg-gradient"]:hover,
+[data-theme="8bit"] .btn-primary:hover {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 2px 2px 0 #c42830 !important;
+}
+
+/* CTA secondary button (outline) */
+[data-theme="8bit"] .btn-secondary {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.6rem !important;
+    border-radius: 0 !important;
+    border: 3px solid #0f9b58 !important;
+    box-shadow: 4px 4px 0 #0f9b58 !important;
+    color: #c4cfa1 !important;
+    background: transparent !important;
+}
+
+[data-theme="8bit"] .btn-secondary:hover {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 2px 2px 0 #0f9b58 !important;
+}
+
+/* Hero tag pills — pixel bordered */
+[data-theme="8bit"] [class*="bg-white/5"],
+[data-theme="8bit"] [class*="bg-white/10"] {
+    border-radius: 0 !important;
+    border: 2px solid rgba(15,155,88,0.50) !important;
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.5rem !important;
+}
+
+/* Nav border — thicker pixel line */
+[data-theme="8bit"] .glass-dark {
+    border-bottom: 3px solid #0f9b58 !important;
+    backdrop-filter: none !important;
+    background: rgba(13,13,26,0.98) !important;
+}
+
+/* Section labels in pixel font */
+[data-theme="8bit"] [class*="uppercase"],
+[data-theme="8bit"] .section-label {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.5rem !important;
+    letter-spacing: 0.15em !important;
+    color: #f7c948 !important;
+}
+
+/* Contact form — pixel bordered */
+[data-theme="8bit"] #contact-form {
+    border-radius: 0 !important;
+    border: 3px solid #0f9b58 !important;
+    box-shadow: 6px 6px 0 rgba(15,155,88,0.30) !important;
+}
+
+[data-theme="8bit"] #contact-form input,
+[data-theme="8bit"] #contact-form textarea {
+    border-radius: 0 !important;
+    border: 2px solid #0f9b58 !important;
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.6rem !important;
+}
+
+/* Submit button */
+[data-theme="8bit"] #submit-btn {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.6rem !important;
+    border-radius: 0 !important;
+    border: 3px solid #c42830 !important;
+    box-shadow: 4px 4px 0 #c42830 !important;
+}
+
+[data-theme="8bit"] #submit-btn:hover {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 2px 2px 0 #c42830 !important;
+}
+
+/* Language toggle — pixel style */
+[data-theme="8bit"] .glass-dark div[role="group"] {
+    border-radius: 0 !important;
+    border: 2px solid #0f9b58 !important;
+}
+
+[data-theme="8bit"] .lang-btn {
+    border-radius: 0 !important;
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.5rem !important;
+}
+
+/* Blinking cursor animation for hero text */
+[data-theme="8bit"] h1::after {
+    content: '_';
+    animation: blink8bit 1s step-end infinite;
+    color: #0f9b58;
+    margin-left: 4px;
+}
+
+@keyframes blink8bit {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+/* Coin/star shimmer on section labels */
+[data-theme="8bit"] .section-label,
+[data-theme="8bit"] [class*="uppercase"] {
+    animation: coinShimmer 2s step-end infinite;
+}
+
+@keyframes coinShimmer {
+    0%, 80%, 100% { color: #f7c948; }
+    85%           { color: #ffffff; }
+    90%           { color: #f7c948; }
+    95%           { color: #ffffff; }
+}
+
+/* Mobile menu — pixel borders */
+[data-theme="8bit"] #mobile-menu a {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 0.8rem !important;
+    line-height: 2.5 !important;
+    color: #c4cfa1 !important;
+    border-bottom: 2px solid rgba(15,155,88,0.20) !important;
+    width: 100%;
+    text-align: center;
+    padding: 12px 0 !important;
+}
+
+[data-theme="8bit"] #mobile-menu a:hover {
+    color: #f7c948 !important;
+}
+
+/* Pixel scrollbar */
+[data-theme="8bit"] ::-webkit-scrollbar {
+    width: 8px;
+}
+
+[data-theme="8bit"] ::-webkit-scrollbar-track {
+    background: #0d0d1a;
+}
+
+[data-theme="8bit"] ::-webkit-scrollbar-thumb {
+    background: #0f9b58;
+    border-radius: 0;
+}
+
+/* ==========================================================================
    COMPONENT MAPPINGS
    All theme-aware component styles — driven entirely by CSS vars above
    ========================================================================== */
@@ -511,7 +842,6 @@ button[class*="bg-gradient"]:hover {
 
 /* --- Sections --- */
 section[class*="from-water-950"],
-section[class*="bg-gradient-to-b"],
 section.hero-section {
     background: var(--c-hero-from) !important;
     background-image: none !important;
@@ -924,6 +1254,35 @@ button {
     color: #e8eaf0;
 }
 
+
+/* ==========================================================================
+   REVEAL ANIMATIONS
+   (Previously in styles.css — required here since styles.css is not loaded)
+   ========================================================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
 /* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
