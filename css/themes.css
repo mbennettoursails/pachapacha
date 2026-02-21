@@ -504,6 +504,23 @@
     image-rendering: pixelated;
 }
 
+/* Scale down hero h1 — Press Start 2P is very wide at large sizes */
+[data-theme="8bit"] h1 {
+    font-size: 1.4rem !important;
+}
+
+@media (min-width: 640px) {
+    [data-theme="8bit"] h1 {
+        font-size: 1.75rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    [data-theme="8bit"] h1 {
+        font-size: 2rem !important;
+    }
+}
+
 /* Pixel font for nav links */
 [data-theme="8bit"] #navbar a,
 [data-theme="8bit"] #navbar button {

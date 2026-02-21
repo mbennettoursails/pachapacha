@@ -1,0 +1,68 @@
+<svg id="logo-svg" width="36" height="36" viewBox="0 0 100 100" fill="none" 
+     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>
+        /* ── Adaptive colour ───────────────────────────────────────────────
+           currentColor inherits from the SVG's own `color` property.
+           Light context  → dark strokes (#111111)
+           Dark context   → light strokes (#f0f0f0)
+           themes.css / index.html can also override via:
+             #logo-svg { color: var(--c-logo); }
+        ──────────────────────────────────────────────────────────────────── */
+        #logo-svg {
+            color: #111111;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            #logo-svg {
+                color: #f0f0f0;
+            }
+        }
+
+        /* ── Animations ─────────────────────────────────────────────────── */
+        #logo-svg path {
+            animation: waveFlow 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+        #logo-svg path:nth-child(1) { animation-delay: 0s;    animation-duration: 3.2s; }
+        #logo-svg path:nth-child(2) { animation-delay: 0.15s; animation-duration: 3.0s; }
+        #logo-svg path:nth-child(3) { animation-delay: 0.30s; animation-duration: 2.8s; }
+        #logo-svg path:nth-child(4) { animation-delay: 0.45s; animation-duration: 2.8s; }
+        #logo-svg path:nth-child(5) { animation-delay: 0.60s; animation-duration: 3.0s; }
+        #logo-svg path:nth-child(6) { animation-delay: 0.75s; animation-duration: 3.2s; }
+
+        @keyframes waveFlow {
+            0%, 100% { transform: translateX(0);   opacity: inherit; }
+            50%       { transform: translateX(3px); opacity: 0.85;    }
+        }
+
+        /* Hover — faster, more pronounced */
+        #logo-svg:hover path {
+            animation-duration: 1.2s !important;
+        }
+        #logo-svg:hover path:nth-child(1) { animation-delay: 0s;    }
+        #logo-svg:hover path:nth-child(2) { animation-delay: 0.10s; }
+        #logo-svg:hover path:nth-child(3) { animation-delay: 0.20s; }
+        #logo-svg:hover path:nth-child(4) { animation-delay: 0.30s; }
+        #logo-svg:hover path:nth-child(5) { animation-delay: 0.40s; }
+        #logo-svg:hover path:nth-child(6) { animation-delay: 0.50s; }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            #logo-svg path { animation: none; }
+        }
+    </style>
+
+    <!-- stroke="currentColor" — inherits from #logo-svg { color: ... } above -->
+    <path d="M 0,14 C 25,4 50,36 75,24 C 88,18 100,14 100,14"
+        stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M 0,28 C 25,18 50,50 75,38 C 88,32 100,28 100,28"
+        stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.72"/>
+    <path d="M 0,42 C 25,32 50,64 75,52 C 88,46 100,42 100,42"
+        stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.38"/>
+    <path d="M 0,56 C 25,46 50,78 75,66 C 88,60 100,56 100,56"
+        stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.38"/>
+    <path d="M 0,70 C 25,60 50,92 75,80 C 88,74 100,70 100,70"
+        stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.72"/>
+    <path d="M 0,84 C 25,74 50,106 75,94 C 88,88 100,84 100,84"
+        stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+</svg>
